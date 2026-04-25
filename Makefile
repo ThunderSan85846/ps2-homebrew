@@ -17,14 +17,12 @@ include $(PS2SDK)/samples/Makefile.eeglobal
 include $(PS2SDK)/samples/Makefile.pref
 endif
 
-all: $(ISO_TGT)
-
 $(ISO_TGT): $(EE_BIN)
 	mkisofs -l -o $(ISO_TGT) $(EE_BIN) SYSTEM.CNF
 
 .PHONY: docker-build
 docker-build:
-	docker run -v $(shell pwd):/src ps2build make
+	docker run -v $(shell pwd):/src ps2build make $(ISO_TGT)
 
 
 .PHONY: clean
