@@ -5,6 +5,7 @@
 #include <draw.h>
 #include <graph.h>
 #include <gs_psm.h>
+#include <gs_gp.h>
 #include <dma.h>
 #include <dma_tags.h>
 
@@ -66,9 +67,13 @@ int draw()
 	qword_t buf[50];
 	qword_t *q = buf;
 	// 6 regs, x1, EOP
-        q->dw[1] = 0x6000000000008001;
+    q->dw[1] = 0x7000000000008001;
 	// GIFTag header - col, pos, col, pos, col, pos
-	q->dw[0] = 0x0000000000515151;
+	q->dw[0] = 0x0000000005151510;
+	q++;
+
+	q->dw[0] = 0;
+	q->dw[1] = GS_PRIM_TRIANGLE;
 	q++;
 
 	for(int i = 0; i < 3; i++) {
