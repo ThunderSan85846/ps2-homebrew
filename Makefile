@@ -12,8 +12,10 @@ PS2SDK=/usr/local/ps2dev/ps2sdk
 
 ISO_TGT=test.iso
 
+ifdef PLATFORM
 include $(PS2SDK)/samples/Makefile.eeglobal
 include $(PS2SDK)/samples/Makefile.pref
+endif
 
 all: $(ISO_TGT)
 
