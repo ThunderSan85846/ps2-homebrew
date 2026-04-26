@@ -29,6 +29,7 @@ int gs_finish()
 {
 	qword_t buf[50];
 	qword_t *q = buf;
+	// TODO: cleanup
 	q = draw_primitive_xyoffset(q, 0, 0, 0);
 	q = draw_finish(q);
 	dma_channel_send_normal(DMA_CHANNEL_GIF, buf, q-buf, 0, 0);
@@ -82,6 +83,8 @@ int draw()
 		q->dw[1] = (blue&0xff) | (0x80 << 32);
 		q++;
 	
+		// 0xa -> 0xa0
+		// fixed point format - xxxx xxxx xxxx.yyyy
 		q->dw[0] = (tri[i+0]<<4) | (tri[i+1]<<4)<<32;
 		q->dw[1] = (tri[i+2]<<4);
 		q++;
